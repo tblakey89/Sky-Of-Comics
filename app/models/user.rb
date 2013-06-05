@@ -9,8 +9,11 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  validates_presence_of :username
   validates_uniqueness_of :username
+  validates_uniqueness_of :email
+
+  validates(:username, presence: true, length: { maximum: 50 }, uniqueness: true)
+  validates(:password, presence: true, length: { minimum: 6 })
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
