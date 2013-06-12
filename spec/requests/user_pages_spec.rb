@@ -41,4 +41,41 @@ describe "UserPages" do
     it { should have_selector('h1', text: user.username) }
     it { should have_selector('title', text: user.username) }
   end
+
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      valid_signin(user)
+      visit edit_user_registration_path(user)
+    end
+
+    describe "page" do
+      it { should have_selector('title', text: "Edit Profile") }
+      it { should have_selector('h2', text: "Edit User") }
+    end
+
+    describe "with invalid information" do
+      before do
+        fill_in "Email", with: ""
+        click_button "Update"
+      end
+
+      it { should have_selector('h2', text: 'errors') }
+    end
+
+    describe "with valid information" do
+      let(:email) { "new@new.com" }
+      let(:password) { "newpassword" }
+      before do
+        fill_in "Email", with: email
+        fill_in "Password", with: password
+        fill_in "Password confirmation", with: password
+        fill_in "Current password", with: user.password
+        click_button "Update"
+      end
+
+      it { should have_selector('p.notice', text: "You updated your account successfully.") }
+      it { should have_selector('title', text: full_title("")) }
+    end
+  end
 end

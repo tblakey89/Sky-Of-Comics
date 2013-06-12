@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   validates(:username, presence: true, length: { maximum: 50 }, uniqueness: true)
-  validates(:password, presence: true, length: { minimum: 6 })
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -38,7 +37,7 @@ class User < ActiveRecord::Base
     super && provider.blank?
   end
 
-  def upate_with_password(params, *options)
+  def update_with_password(params, *options)
     if encrypted_password.blank?
       update_attributes(params, *options)
     else
