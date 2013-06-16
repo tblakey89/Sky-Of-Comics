@@ -12,6 +12,7 @@ group :development, :test  do
   gem 'guard-spork', :github => 'guard/guard-spork'
   gem 'childprocess', '0.3.9'
   gem 'spork', '0.9.2'
+  gem 'faker', '1.0.1'
 end
 
 # Gems used only for assets and not required

@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :follows, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :follows, source: :followed
+  has_many :reverse_follows, foreign_key: "followed_id", class_name: "Follow", dependent: :destroy
+  has_many :followers, through: :reverse_follows, source: :follower
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
@@ -43,5 +48,17 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  def following?(other_user)
+    follows.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    follows.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    follows.find_by_followed_id(other_user.id).destroy
   end
 end
