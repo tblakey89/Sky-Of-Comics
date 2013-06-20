@@ -1,0 +1,9 @@
+<% provide(:title, @title) %>
+
+<% if @users.any? %>
+  <% @users.each do |user| %>
+    <div>
+      <%= link_to user.username, user %>
+    </div>
+  <% end %>
+<% end %>

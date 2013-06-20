@@ -1,7 +1,11 @@
 SkyOfComics::Application.routes.draw do
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout"  }, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  resources :users
+  resources :users do
+    get :following, :followers
+  end
+
+  resources :follows, only: [ :create, :destroy ]
 
   root to: 'static_pages#home'
 

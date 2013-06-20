@@ -1,2 +1,6 @@
 <% provide(:title, @user.username) %>
 <h1><%= @user.username %></h1>
+
+<div>
+  <%= render 'follow_form' if user_signed_in? %>
+</div>
