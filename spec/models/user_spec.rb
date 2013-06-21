@@ -16,6 +16,7 @@ describe User do
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
+  it { should respond_to(:comics) }
   it { should be_valid }
 
   describe "when password is not present" do

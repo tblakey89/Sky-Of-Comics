@@ -7,6 +7,8 @@ SkyOfComics::Application.routes.draw do
 
   resources :follows, only: [ :create, :destroy ]
 
+  resources :comics
+
   root to: 'static_pages#home'
 
   match '/help', to: 'static_pages#help'

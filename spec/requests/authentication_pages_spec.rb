@@ -65,6 +65,13 @@ describe "Authentication" do
           specify { response.should redirect_to(new_user_session_path) }
         end
       end
+
+      describe "in the comics controller" do
+        describe "submitting to the create action" do
+          before { visit new_comic_path }
+          it { should have_selector('title', text: "Sign in") }
+        end
+      end
     end
   end
 end

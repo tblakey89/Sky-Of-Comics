@@ -5,4 +5,10 @@ FactoryGirl.define do
     password "factory1"
     password_confirmation "factory1"
   end
+
+  factory :comic do
+    sequence(:name) { |n| "comic#{n}" }
+    description "This is a description"
+    user
+  end
 end

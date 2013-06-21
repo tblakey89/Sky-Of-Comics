@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130615165546) do
+ActiveRecord::Schema.define(:version => 20130621215031) do
+
+  create_table "comics", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "comics", ["user_id", "name"], :name => "index_comics_on_user_id_and_name"
+  add_index "comics", ["user_id"], :name => "index_comics_on_user_id"
 
   create_table "follows", :force => true do |t|
     t.integer  "follower_id"
