@@ -13,6 +13,7 @@ group :development, :test  do
   gem 'childprocess', '0.3.9'
   gem 'spork', '0.9.2'
   gem 'faker', '1.0.1'
+  gem 'mailcatcher'
 end
 
 # Gems used only for assets and not required
