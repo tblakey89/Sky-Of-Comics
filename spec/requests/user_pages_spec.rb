@@ -15,7 +15,7 @@ describe "UserPages" do
 
     let(:submit) { "Sign up" }
     describe "with invalid information" do
-      it "should not create an account" do
+      it "does not create an account" do
         expect { click_button submit }.not_to change(User, :count)
       end
     end
@@ -28,13 +28,13 @@ describe "UserPages" do
         fill_in "Password confirmation", with: "password"
       end
 
-      it "should create a new user" do
+      it "creates a new user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
 
-      describe "send email" do
+      context "sending emails" do
         before { click_button submit }
-        it "should send" do
+        it "sends an email to the signed up user" do
           last_email.to.should include("example89@example.com")
         end
       end
@@ -55,13 +55,13 @@ describe "UserPages" do
       describe "following a user" do
         before { visit user_path(other_user) }
 
-        it "should increment the followed user count" do
+        it "increments the followed user count" do
           expect do
             click_button "Follow"
           end.to change(user.followed_users, :count).by(1)
         end
 
-        it "should increment the other user's followers count" do
+        it "increments the other user's followers count" do
           expect do
             click_button "Follow"
           end.to change(other_user.followers, :count).by(1)
@@ -79,13 +79,13 @@ describe "UserPages" do
           visit user_path(other_user)
         end
 
-        it "should decrement the followed user count" do
+        it "decrements the followed user count" do
           expect do
             click_button "Unfollow"
           end.to change(user.followed_users, :count).by(-1)
         end
 
-        it "should decrement the other user's followers count" do
+        it "decrements the other user's followers count" do
           expect do
             click_button "Unfollow"
           end.to change(other_user.followers, :count).by(-1)
@@ -144,10 +144,13 @@ describe "UserPages" do
       visit users_path
     end
 
-    it { should have_selector('title', text: "Users") }
+    it "displays the users index path" do
+      current_path.should == users_path
+    end
+
     it { should have_selector('h1', text: "All Users") }
 
-    it "should list each user" do
+    it "lists each user" do
       User.all.each do |user|
         page.should have_selector('li', text: user.username)
       end
