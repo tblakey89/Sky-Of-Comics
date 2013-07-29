@@ -1,0 +1,13 @@
+<%= form_for [@commentable, @comment] do |f| %>
+  <% if @comment.errors.any? %>
+    <p>Please correct the following errors</p>
+    <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= f.text_area :content, rows: 8 %>
+  <%= f.submit %>
+<% end %>
+

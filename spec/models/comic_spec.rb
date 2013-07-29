@@ -9,6 +9,7 @@ describe Comic do
   it { should respond_to(:name) }
   it { should respond_to(:description) }
   it { should respond_to(:user) }
+  it { should respond_to(:comments) }
   it { should be_valid }
 
   describe "when name is not present" do

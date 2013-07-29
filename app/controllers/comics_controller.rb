@@ -7,6 +7,9 @@ class ComicsController < ApplicationController
 
   def show
     @comic = Comic.find(params[ :id])
+    @commentable = @comic
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def new

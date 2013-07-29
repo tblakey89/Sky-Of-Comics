@@ -7,7 +7,9 @@ SkyOfComics::Application.routes.draw do
 
   resources :follows, only: [ :create, :destroy ]
 
-  resources :comics
+  resources :comics do
+    resources :comments
+  end
 
   root to: 'static_pages#home'
 
