@@ -2,6 +2,19 @@ require 'spec_helper'
 describe ComicsController do
   include Devise::TestHelpers
 
+  describe "#index" do
+    it "populates an array of comics" do
+      Comic.stub(all: [comic = stub])
+      get :index
+      assigns(:comics).should eq([comic])
+    end
+
+    it "renders the index view" do
+      get :index
+      response.should render_template :index
+    end
+  end
+
   describe "#create" do
     it "requires user to be signed in" do
       post :create

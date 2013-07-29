@@ -2,7 +2,7 @@ class ComicsController < ApplicationController
   before_filter :authenticate_user!, only: [ :new, :create, :update, :destroy ]
 
   def index
-
+    @comics = Comic.all
   end
 
   def show

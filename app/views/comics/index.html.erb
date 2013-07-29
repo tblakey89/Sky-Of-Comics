@@ -1,0 +1,8 @@
+<% provide(:title, "Comics") %>
+<h1>All Comics</h1>
+
+<ul>
+  <% @comics.each do |comic| %>
+    <li><%= link_to comic.name, comic %></li>
+  <% end %>
+</ul>
