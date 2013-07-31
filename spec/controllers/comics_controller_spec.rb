@@ -47,7 +47,7 @@ describe ComicsController do
           }.to change(Comic, :count).by(0)
         end
 
-        it "re-renders the new method" do
+        it "re-renders the new template" do
           post :create, comic: FactoryGirl.attributes_for(:invalid_comic)
           response.should render_template :new
         end

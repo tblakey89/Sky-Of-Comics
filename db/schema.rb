@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130729212550) do
+ActiveRecord::Schema.define(:version => 20130731204505) do
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "blogs", ["user_id", "title"], :name => "index_blogs_on_user_id_and_title", :unique => true
+  add_index "blogs", ["user_id"], :name => "index_blogs_on_user_id"
 
   create_table "comics", :force => true do |t|
     t.string   "name"
@@ -30,9 +41,11 @@ ActiveRecord::Schema.define(:version => 20130729212550) do
     t.string   "commentable_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id", "id"], :name => "index_comments_on_user_id_and_id"
 
   create_table "follows", :force => true do |t|
     t.integer  "follower_id"

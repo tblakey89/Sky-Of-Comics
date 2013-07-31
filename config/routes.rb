@@ -5,6 +5,10 @@ SkyOfComics::Application.routes.draw do
     get :following, :followers
   end
 
+  resources :blogs do
+    resources :comments
+  end
+
   resources :follows, only: [ :create, :destroy ]
 
   resources :comics do

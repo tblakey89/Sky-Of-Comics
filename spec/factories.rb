@@ -21,6 +21,13 @@ FactoryGirl.define do
 
   factory :comment do
     content "Test123"
+    user
+    association :commentable, factory: :comic
+  end
+
+  factory :invalid_comment, class: "Comment" do
+    content nil
+    user
     association :commentable, factory: :comic
   end
 end

@@ -45,5 +45,31 @@ describe CommentsController do
         response.should render_template :new
       end
     end
+
+    describe "#create" do
+      it "creates a new comment" do
+        expect {
+          post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:comment, user_id: user.id)
+        }.to change(Comment, :count).by(1)
+      end
+
+      it "redirects to the commentable page" do
+        post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:comment, user_id: user.id)
+        response.should redirect_to Comic.find(comic.id)
+      end
+
+      describe "invalid comment" do
+        it "should not create a comment" do
+          expect {
+            post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:invalid_comment)
+          }.to change(Comment, :count).by(0)
+        end
+
+        it "re-renders the new template" do
+          post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:invalid_comment)
+          response.should render_template :new
+        end
+      end
+    end
   end
 end

@@ -1,0 +1,10 @@
+<% provide(:title, "Blogs") %>
+<h1>All Blogs</h1>
+<div>
+  <%= link_to "New Blog", new_blog %></a>
+</div>
+<ul>
+  <% @blogs.each do |blog| %>
+    <li><%= link_to blog.title, blog %></li>
+  <% end %>
+</ul>

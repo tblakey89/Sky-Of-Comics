@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :reverse_follows, foreign_key: "followed_id", class_name: "Follow", dependent: :destroy
   has_many :followers, through: :reverse_follows, source: :follower
   has_many :comics, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :blogs, dependent: :destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
