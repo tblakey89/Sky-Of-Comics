@@ -12,4 +12,15 @@ FactoryGirl.define do
     description "This is a description"
     user
   end
+
+  factory :invalid_comic, class: "Comic"  do
+    name nil
+    description "bad comic"
+    user
+  end
+
+  factory :comment do
+    content "Test123"
+    association :commentable, factory: :comic
+  end
 end

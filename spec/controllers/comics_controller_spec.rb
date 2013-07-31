@@ -15,24 +15,57 @@ describe ComicsController do
     end
   end
 
-  describe "#create" do
-    it "requires user to be signed in" do
-      post :create
-      response.should redirect_to new_user_session_path
+  describe "without signing in" do
+    describe "#create" do
+      it "requires user to be signed in" do
+        post :create
+        response.should redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe "with signing in" do
+    let(:user){ FactoryGirl.create(:user) }
+    before { sign_in user }
+
+    describe "#create" do
+      it "creates a new comic" do
+        expect {
+          post :create, comic: FactoryGirl.attributes_for(:comic)
+        }.to change(Comic, :count).by(1)
+      end
+
+      it "redirects to the new contact" do
+        post :create, comic: FactoryGirl.attributes_for(:comic)
+        response.should redirect_to Comic.last
+      end
+
+      describe "with invalid information" do
+        it "does not create a new comic" do
+          expect {
+            post :create, comic: FactoryGirl.attributes_for(:invalid_comic)
+          }.to change(Comic, :count).by(0)
+        end
+
+        it "re-renders the new method" do
+          post :create, comic: FactoryGirl.attributes_for(:invalid_comic)
+          response.should render_template :new
+        end
+      end
     end
   end
 
   describe "#show" do
+    let(:the_comic) { FactoryGirl.create(:comic) }
+    let(:the_comment) { FactoryGirl.create(:comment, commentable: the_comic) }
 
     it "assigns a comic" do
-      Comic.stub(:find).and_return(comic = stub)
-      get :show, id: "1"
-      assigns(:comic).should eq(comic)
+      get :show, id: the_comic.id
+      assigns(:comic).should eq(the_comic)
     end
 
     it "renders the show view" do
-      Comic.stub(:find).and_return(comic = stub)
-      get :show, id: "1"
+      get :show, id: the_comic.id
       response.should render_template :show
     end
   end
