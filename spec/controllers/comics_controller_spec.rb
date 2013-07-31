@@ -35,7 +35,7 @@ describe ComicsController do
         }.to change(Comic, :count).by(1)
       end
 
-      it "redirects to the new contact" do
+      it "redirects to the new comic" do
         post :create, comic: FactoryGirl.attributes_for(:comic)
         response.should redirect_to Comic.last
       end

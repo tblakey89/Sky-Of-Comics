@@ -19,6 +19,18 @@ FactoryGirl.define do
     user
   end
 
+  factory :blog do
+    sequence(:title) { |n| "blog#{n}" }
+    content "This is the content"
+    user
+  end
+
+  factory :invalid_blog, class: "Blog" do
+    title nil
+    content "bad content"
+    user
+  end
+
   factory :comment do
     content "Test123"
     user
