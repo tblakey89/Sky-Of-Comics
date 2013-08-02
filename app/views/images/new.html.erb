@@ -1,0 +1,17 @@
+<% provide(:title, "New Image") %>
+
+<h1>New Image</h1>
+<div>
+  <%= form_for @image, html: { multipart: true } do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+
+    <%= f.label :location %>
+    <%= f.file_field :location %>
+
+    <%= f.submit "Create" %>
+  <% end %>
+</div>

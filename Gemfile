@@ -5,6 +5,8 @@ gem 'pg'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'devise'
+gem 'carrierwave'
+gem  'rmagick'
 
 group :development, :test  do
   gem 'rspec-rails', '2.9.0'

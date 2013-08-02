@@ -1,0 +1,8 @@
+<% provide(:title, @image.name) %>
+
+<h1><%= @image.name %></h1>
+<%= image_tag @image.location.url %>
+<p><%= @image.description %></p>
+
+<%= render 'comments/comments' %>
+<%= render 'comments/form' %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731204505) do
+ActiveRecord::Schema.define(:version => 20130801235345) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(:version => 20130731204505) do
   add_index "follows", ["followed_id"], :name => "index_follows_on_followed_id"
   add_index "follows", ["follower_id", "followed_id"], :name => "index_follows_on_follower_id_and_followed_id", :unique => true
   add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "location"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "images", ["user_id", "location"], :name => "index_images_on_user_id_and_image"
+  add_index "images", ["user_id", "name"], :name => "index_images_on_user_id_and_name"
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

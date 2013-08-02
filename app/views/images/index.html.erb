@@ -1,0 +1,13 @@
+<% provide(:title, "Images") %>
+<h1>All Images</h1>
+<div>
+  <%= link_to "New Image", :new_image %>
+</div>
+<ul>
+  <% @images.each do |image| %>
+    <li>
+      <%= link_to image.name, image %>
+      <%= image_tag image.location_url(:thumb) %>
+    </li>
+  <% end %>
+</ul>

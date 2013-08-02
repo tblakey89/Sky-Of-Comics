@@ -31,6 +31,20 @@ FactoryGirl.define do
     user
   end
 
+  factory :image do
+    sequence(:name) { |n| "image#{n}" }
+    description "This is a description"
+    location { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'test.jpg')) }
+    user
+  end
+
+  factory :invalid_image, class: "Image" do
+    name nil
+    description "This is a bad image"
+    location nil
+    user
+  end
+
   factory :comment do
     content "Test123"
     user
