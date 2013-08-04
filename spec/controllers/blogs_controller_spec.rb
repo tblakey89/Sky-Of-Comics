@@ -57,6 +57,12 @@ describe BlogsController do
         }.to change(Blog, :count).by(1)
       end
 
+      it "creates a new activity" do
+        expect {
+          post :create, blog: FactoryGirl.attributes_for(:blog)
+        }.to change(Activity, :count).by(1)
+      end
+
       it "redirects to the new blog" do
         post :create, blog: FactoryGirl.attributes_for(:blog)
         response.should redirect_to Blog.last
@@ -67,6 +73,12 @@ describe BlogsController do
           expect {
             post :create, blog: FactoryGirl.attributes_for(:invalid_blog)
           }.to change(Blog, :count).by(0)
+        end
+
+        it "does not create a new activity" do
+          expect {
+            post :create, blog: FactoryGirl.attributes_for(:invalid_blog)
+          }.to change(Activity, :count).by(0)
         end
 
         it "re-renders the new template" do

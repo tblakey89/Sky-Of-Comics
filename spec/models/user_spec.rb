@@ -20,6 +20,7 @@ describe User do
   it { should respond_to(:comments) }
   it { should respond_to(:blogs) }
   it { should respond_to(:images) }
+  it { should respond_to(:activities) }
   it { should be_valid }
 
   describe "when password is not present" do

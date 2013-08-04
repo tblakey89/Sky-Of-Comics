@@ -19,6 +19,7 @@ class BlogsController < ApplicationController
   def create
     @blog = current_user.blogs.build(params[:blog])
     if @blog.save
+      track_activity @blog
       flash[:success] = "Blog created"
       redirect_to @blog
     else

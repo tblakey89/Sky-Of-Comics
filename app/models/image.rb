@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  attr_accessible :name, :description, :location
+  attr_accessible :name, :description, :location, :remote_location_url
 
   has_many :comments, as: :commentable
 

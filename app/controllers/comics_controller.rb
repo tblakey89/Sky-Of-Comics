@@ -19,6 +19,7 @@ class ComicsController < ApplicationController
   def create
     @comic = current_user.comics.build(params[:comic])
     if @comic.save
+      track_activity @comic
       flash[:success] = "Comic Created"
       redirect_to @comic
     else

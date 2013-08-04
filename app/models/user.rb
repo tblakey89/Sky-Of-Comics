@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :blogs, dependent: :destroy
   has_many :images, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me

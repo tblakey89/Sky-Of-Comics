@@ -57,6 +57,12 @@ describe ImagesController do
         }.to change(Image, :count).by(1)
       end
 
+      it "creates a new activity" do
+        expect {
+          post :create, image: FactoryGirl.attributes_for(:image)
+        }.to change(Activity, :count).by(1)
+      end
+
       it "redirects to the new image" do
         post :create, image: FactoryGirl.attributes_for(:image)
         response.should redirect_to Image.last
@@ -67,6 +73,12 @@ describe ImagesController do
           expect {
             post :create, image: FactoryGirl.attributes_for(:invalid_image)
           }.to change(Image, :count).by(0)
+        end
+
+        it "does not create a new activity" do
+          expect {
+            post :create, image: FactoryGirl.attributes_for(:invalid_image)
+          }.to change(Activity, :count).by(0)
         end
 
         it "re-renders the new template" do

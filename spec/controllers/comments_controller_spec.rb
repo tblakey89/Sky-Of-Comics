@@ -53,6 +53,12 @@ describe CommentsController do
         }.to change(Comment, :count).by(1)
       end
 
+      it "creates a new activity" do
+        expect {
+          post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:comment, user_id: user.id)
+        }.to change(Activity, :count).by(1)
+      end
+
       it "redirects to the commentable page" do
         post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:comment, user_id: user.id)
         response.should redirect_to Comic.find(comic.id)
@@ -63,6 +69,12 @@ describe CommentsController do
           expect {
             post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:invalid_comment)
           }.to change(Comment, :count).by(0)
+        end
+
+        it "should not create a new activity" do
+          expect {
+            post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:invalid_comment)
+          }.to change(Activity, :count).by(0)
         end
 
         it "re-renders the new template" do

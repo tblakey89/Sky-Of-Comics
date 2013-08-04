@@ -19,6 +19,7 @@ class ImagesController < ApplicationController
   def create
     @image = current_user.images.build(params[:image])
     if @image.save
+      track_activity @image
       flash[:success] = "Image created"
       redirect_to @image
     else

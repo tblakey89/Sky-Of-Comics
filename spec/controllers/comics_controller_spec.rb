@@ -35,6 +35,12 @@ describe ComicsController do
         }.to change(Comic, :count).by(1)
       end
 
+      it "creates a new activity" do
+        expect {
+          post :create, comic: FactoryGirl.attributes_for(:comic)
+        }.to change(Activity, :count).by(1)
+      end
+
       it "redirects to the new comic" do
         post :create, comic: FactoryGirl.attributes_for(:comic)
         response.should redirect_to Comic.last
@@ -45,6 +51,12 @@ describe ComicsController do
           expect {
             post :create, comic: FactoryGirl.attributes_for(:invalid_comic)
           }.to change(Comic, :count).by(0)
+        end
+
+        it "does not create a new activity" do
+          expect {
+            post :create, comic: FactoryGirl.attributes_for(:invalid_comic)
+          }.to change(Activity, :count).by(0)
         end
 
         it "re-renders the new template" do

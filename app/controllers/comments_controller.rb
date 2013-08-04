@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(params[:comment])
     @comment.user = current_user
     if @comment.save
+      track_activity @comment
       redirect_to @commentable, notice: "comment created"
     else
       render :new

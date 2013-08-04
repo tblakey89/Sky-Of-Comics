@@ -13,4 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# ignore all uploads
 /public/uploads/image/location
+/public/uploads/tmp
