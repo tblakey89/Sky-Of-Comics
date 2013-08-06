@@ -40,6 +40,12 @@ describe "ImagePages" do
 
         it { should have_selector('h1', text: image.name) }
         it { should have_selector('p', text: "test content") }
+
+        describe "should create an activity" do
+          before { visit user_path(user) }
+
+          it { should have_content(user.username + " commented on " + image.name) }
+        end
       end
     end
   end

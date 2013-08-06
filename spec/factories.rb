@@ -20,13 +20,13 @@ FactoryGirl.define do
   end
 
   factory :blog do
-    sequence(:title) { |n| "blog#{n}" }
+    sequence(:name) { |n| "blog#{n}" }
     content "This is the content"
     user
   end
 
   factory :invalid_blog, class: "Blog" do
-    title nil
+    name nil
     content "bad content"
     user
   end

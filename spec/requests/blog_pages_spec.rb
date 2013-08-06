@@ -22,12 +22,21 @@ describe "BlogPages" do
 
     describe "with valid information" do
       before do
-        fill_in 'Title', with: "Test Title"
+        fill_in 'Name', with: "Test Title"
         fill_in 'Content', with: "test content"
       end
 
       it "should create a blog post" do
         expect { click_button "Create" }.should change(Blog, :count).by(1)
+      end
+
+      describe "blog should appear on user's activity feed" do
+        before do
+          click_button "Create"
+          visit user_path(user)
+        end
+
+        it { should have_content(user.username + " wrote a new blog: Test Title") }
       end
     end
   end
@@ -35,8 +44,8 @@ describe "BlogPages" do
   describe "visit a blog page" do
     before { visit blog_path(blog.id) }
 
-    it { should have_selector('h1', text: blog.title) }
-    it { should have_selector('title', text: blog.title) }
+    it { should have_selector('h1', text: blog.name) }
+    it { should have_selector('title', text: blog.name) }
     it { should have_selector('h3', text: "Comment") }
 
     describe "a user can enter a comment" do
@@ -49,8 +58,14 @@ describe "BlogPages" do
       describe "after clicking create comment" do
         before { click_button "Create Comment" }
 
-        it { should have_selector('h1', text: blog.title) }
+        it { should have_selector('h1', text: blog.name) }
         it { should have_selector('p', text: "test content") }
+
+        describe "should create an activity" do
+          before { visit user_path(user) }
+
+          it { should have_content(user.username + " commented on " + blog.name) }
+        end
       end
     end
   end

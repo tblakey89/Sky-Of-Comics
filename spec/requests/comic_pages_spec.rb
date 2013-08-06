@@ -28,6 +28,14 @@ describe "ComicPages" do
       it "should create a comic" do
         expect { click_button "Create" }.should change(Comic, :count).by(1)
       end
+
+      describe "add activity to user's profile" do
+        before do
+          click_button "Create"
+          visit user_path(user)
+        end
+        it { should have_content(user.username + " created a new comic: test comic1") }
+      end
     end
   end
 
@@ -50,6 +58,12 @@ describe "ComicPages" do
 
         it { should have_selector('h1', text: comic.name) }
         it { should have_selector('p', text: "test content") }
+
+        describe "should create an activity" do
+          before { visit user_path(user) }
+
+          it { should have_content(user.username + " commented on " + comic.name) }
+        end
       end
     end
   end

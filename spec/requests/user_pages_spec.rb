@@ -71,6 +71,16 @@ describe "UserPages" do
           before { click_button "Follow" }
           it { should have_selector('input', value: 'Unfollow') }
         end
+
+        describe "adds to both users' activity feeds" do
+          before { click_button "Follow" }
+          it { should have_content(other_user.username + " was followed by " + user.username) }
+
+          describe "visiting user's own profile" do
+            before { visit user_path(user) }
+            it { should have_content(user.username + " followed " + other_user.username) }
+          end
+        end
       end
 
       describe "unfollowing a user" do
