@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806211102) do
+ActiveRecord::Schema.define(:version => 20130807210403) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20130806211102) do
 
   add_index "blogs", ["user_id", "name"], :name => "index_blogs_on_user_id_and_title", :unique => true
   add_index "blogs", ["user_id"], :name => "index_blogs_on_user_id"
+
+  create_table "comic_images", :force => true do |t|
+    t.integer  "page_number"
+    t.integer  "comic_id"
+    t.string   "image"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "comic_images", ["comic_id"], :name => "index_comic_images_on_comic_id"
 
   create_table "comics", :force => true do |t|
     t.string   "name"
