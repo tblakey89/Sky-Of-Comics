@@ -61,7 +61,7 @@ describe CommentsController do
 
       it "redirects to the commentable page" do
         post :create, comic_id: comic.id, comment: FactoryGirl.attributes_for(:comment, user_id: user.id)
-        response.should redirect_to Comic.find(comic.id)
+        response.should redirect_to comic
       end
 
       describe "invalid comment" do

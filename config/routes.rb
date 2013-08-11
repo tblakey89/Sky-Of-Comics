@@ -19,6 +19,7 @@ SkyOfComics::Application.routes.draw do
 
   resources :comics do
     resources :comments
+    resources :comic_images
   end
 
   root to: 'static_pages#home'

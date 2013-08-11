@@ -45,6 +45,18 @@ FactoryGirl.define do
     user
   end
 
+  factory :comic_image do
+    sequence(:page_number) { |n| n }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'test.jpg')) }
+    comic
+  end
+
+  factory :invalid_comic_image, class: "ComicImage" do
+    sequence(:page_number) { |n| n }
+    image nil
+    comic
+  end
+
   factory :comment do
     content "Test123"
     user

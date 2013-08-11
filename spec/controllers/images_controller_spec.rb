@@ -3,7 +3,7 @@ describe ImagesController do
   include Devise::TestHelpers
 
   describe "#index" do
-    it "populates an array of blogs" do
+    it "populates an array of images" do
       Image.stub(all: [image = stub])
       get :index
       assigns(:images).should eq([image])

@@ -1,0 +1,14 @@
+<% provide(:title, "New Comic Page") %>
+
+<h1>New Comic Page</h1>
+<div>
+  <%= form_for @comic_image, html: { multipart: true } do |f| %>
+    <%= f.label :page_number %>
+    <%= f.text_field :page_number %>
+
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+
+    <%= f.submit "Create %>
+  <% end %>
+</div>

@@ -16,4 +16,5 @@
 
 # ignore all uploads
 /public/uploads/image/location
+/public/uploads/comic_image/image
 /public/uploads/tmp
