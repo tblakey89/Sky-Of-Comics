@@ -4,7 +4,7 @@ describe "ComicPages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:comic) { FactoryGirl.create(:comic) }
+  let(:comic) { FactoryGirl.create(:comic, user: user) }
 
   before { valid_signin user }
 
@@ -63,6 +63,27 @@ describe "ComicPages" do
           before { visit user_path(user) }
 
           it { should have_content(user.username + " commented on " + comic.name) }
+        end
+      end
+    end
+
+    describe "owner should be able to add a new page" do
+      it { should have_selector('a', text: "New Comic Page") }
+
+      describe "clicking link takes owner to new comic image page" do
+        before { click_link "new_comic_page" }
+
+        it { should have_selector('h1', text: "New Comic Page") }
+
+        describe "add a new page to the comic" do
+          before do
+            fill_in "Page number", with: 1
+            attach_file "Image", "spec/support/images/test.jpg"
+            click_button "Create"
+          end
+
+          it { should have_selector('h1', text: comic.name) }
+          it { should have_xpath("//img[@src=\"#{comic.comic_images.first.image_url(:page)}\"]") }
         end
       end
     end

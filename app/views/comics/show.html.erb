@@ -2,7 +2,17 @@
 
 <h1><%= @comic.name %></h1>
 
+<%= link_to "New Comic Page", new_comic_comic_image_path(@comic), id: "new_comic_page" if current_user == @comic.user %>
+
 <p><%= @comic.description %></p>
+
+<ul>
+  <% @comic.comic_images.each do |page| %>
+    <li>
+      <%= image_tag page.image_url(:page) %>
+    </li>
+  <% end %>
+</ul>
 
 <%= render 'comments/comments' %>
 <%= render 'comments/form' %>
