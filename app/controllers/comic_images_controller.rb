@@ -29,7 +29,6 @@ class ComicImagesController < ApplicationController
 private
 
   def load_comic
-    comic, id = request.path.split('/')[1,2]
-    @comic = Comic.find(id)
+    @comic = Comic.find(params[:comic_id])
   end
 end

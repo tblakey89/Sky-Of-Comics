@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :follows, source: :followed
   has_many :reverse_follows, foreign_key: "followed_id", class_name: "Follow", dependent: :destroy
   has_many :followers, through: :reverse_follows, source: :follower
+  has_many :sent_messages, foreign_key: "sender_id", class_name: "PrivateMessage", dependent: :destroy
+  has_many :messages, foreign_key: "recipient_id", class_name: "PrivateMessage", dependent: :destroy
   has_many :comics, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :blogs, dependent: :destroy

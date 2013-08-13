@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811124105) do
+ActiveRecord::Schema.define(:version => 20130812213441) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -92,6 +92,20 @@ ActiveRecord::Schema.define(:version => 20130811124105) do
   add_index "images", ["user_id", "location"], :name => "index_images_on_user_id_and_image"
   add_index "images", ["user_id", "name"], :name => "index_images_on_user_id_and_name"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
+
+  create_table "private_messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "read",         :default => false
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "private_messages", ["recipient_id"], :name => "index_private_messages_on_recipient_id"
+  add_index "private_messages", ["sender_id", "recipient_id"], :name => "index_private_messages_on_sender_id_and_recipient_id"
+  add_index "private_messages", ["sender_id"], :name => "index_private_messages_on_sender_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

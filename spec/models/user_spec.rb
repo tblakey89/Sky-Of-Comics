@@ -21,6 +21,8 @@ describe User do
   it { should respond_to(:blogs) }
   it { should respond_to(:images) }
   it { should respond_to(:activities) }
+  it { should respond_to(:messages) }
+  it { should respond_to(:sent_messages) }
   it { should be_valid }
 
   describe "when password is not present" do

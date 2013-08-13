@@ -57,6 +57,22 @@ FactoryGirl.define do
     comic
   end
 
+  factory :private_message do
+    title "This is a message"
+    content "This is what i am sending you"
+    read false
+    association :sender, factory: :user
+    association :recipient, factory: :user
+  end
+
+  factory :invalid_private_message, class: "PrivateMessage" do
+    title nil
+    content nil
+    read false
+    association :sender, factory: :user
+    association :recipient, factory: :user
+  end
+
   factory :comment do
     content "Test123"
     user
