@@ -1,0 +1,7 @@
+<% provide(:title, @private_message.title) %>
+
+<h1><%= @private_message.title %></h1>
+
+<p>From: <%= @private_message.sender.username %></p>
+
+<p><%= @private_message.content %></p>

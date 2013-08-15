@@ -66,7 +66,7 @@ FactoryGirl.define do
   end
 
   factory :invalid_private_message, class: "PrivateMessage" do
-    title nil
+    title ""
     content nil
     read false
     association :sender, factory: :user

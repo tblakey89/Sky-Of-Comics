@@ -3,23 +3,24 @@ class PrivateMessagesController < ApplicationController
   before_filter :load_user
 
   def index
-    @messages = @user.messages
+    @private_messages = @user.messages
   end
 
   def show
-
+    @private_message = PrivateMessage.find(params[ :id])
   end
 
   def new
-
+    @message = @user.sent_messages.new
   end
 
   def create
-
-  end
-
-  def update
-
+    @message = @user.sent_messages.new(params[:private_message])
+    if @message.save
+      redirect_to user_private_messages_path(@user.id) , notice: "message sent"
+    else
+      render "new"
+    end
   end
 
   def delete
@@ -27,8 +28,10 @@ class PrivateMessagesController < ApplicationController
   end
 
   def destroy
-
+    #don't delete for both users :/ glhf
   end
+
+#also what about sent messages?
 
 private
   def load_user
