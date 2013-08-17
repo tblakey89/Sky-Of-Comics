@@ -16,6 +16,8 @@ group :development, :test  do
   gem 'spork', '0.9.2'
   gem 'faker', '1.0.1'
   gem 'mailcatcher'
+  gem 'terminal-notifier'
+  gem 'terminal-notifier-guard'
 end
 
 # Gems used only for assets and not required

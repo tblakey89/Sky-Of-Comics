@@ -6,6 +6,10 @@ class PrivateMessagesController < ApplicationController
     @private_messages = @user.messages
   end
 
+  def sent
+    @private_messages = @user.sent_messages
+  end
+
   def show
     @private_message = PrivateMessage.find(params[ :id])
   end

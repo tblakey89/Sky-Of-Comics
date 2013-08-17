@@ -5,7 +5,11 @@ SkyOfComics::Application.routes.draw do
 
   resources :users do
     get :following, :followers
-    resources :private_messages
+    resources :private_messages do
+      collection do
+        get 'sent'
+      end
+    end
   end
 
   resources :blogs do

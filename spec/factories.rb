@@ -60,7 +60,6 @@ FactoryGirl.define do
   factory :private_message do
     title "This is a message"
     content "This is what i am sending you"
-    read false
     association :sender, factory: :user
     association :recipient, factory: :user
   end
@@ -68,7 +67,6 @@ FactoryGirl.define do
   factory :invalid_private_message, class: "PrivateMessage" do
     title ""
     content nil
-    read false
     association :sender, factory: :user
     association :recipient, factory: :user
   end

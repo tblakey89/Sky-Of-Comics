@@ -2,8 +2,11 @@
 
 <h1>New Message</h1>
 
+<p>Send message to <%= @user.username %></p>
+
 <div>
   <%= form_for [@user, @message] do |f| %>
+
     <%= f.label :title %>
     <%= f.text_field :title %>
 

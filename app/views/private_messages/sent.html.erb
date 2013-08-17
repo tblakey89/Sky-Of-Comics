@@ -1,0 +1,8 @@
+<% provide(:title, "Sent Messages") %>
+<h1>Sent Messages</h1>
+
+<ul>
+  <% @private_messages.each do |message| %>
+    <li><%= link_to message.title, user_private_message_path(@user.id, message.id) %></li>
+  <% end %>
+</ul>

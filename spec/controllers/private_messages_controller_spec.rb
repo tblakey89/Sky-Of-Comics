@@ -34,6 +34,13 @@ describe PrivateMessagesController do
         response.should redirect_to new_user_session_path
       end
     end
+
+    describe "#sent" do
+      it "requires the user to be signed in" do
+        get :sent, user_id: user2.id
+        response.should redirect_to new_user_session_path
+      end
+    end
   end
 
   describe "with signing in" do
@@ -50,6 +57,20 @@ describe PrivateMessagesController do
       it "renders the index view" do
         get :index, user_id: private_message.recipient_id
         response.should render_template :index
+      end
+    end
+
+    describe "#sent" do
+      it "populates an array of messages" do
+        private_message2 = FactoryGirl.create(:private_message, sender: user2, recipient_id: user.id)
+        private_messages = user2.sent_messages
+        get :sent, user_id: user2.id
+        assigns(:private_messages).should eq([private_message2])
+      end
+
+      it "renders the sent view" do
+        get :sent, user_id: private_message.sender_id
+        response.should render_template :sent
       end
     end
 
