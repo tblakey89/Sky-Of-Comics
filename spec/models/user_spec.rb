@@ -9,6 +9,7 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:avatar) }
   it { should respond_to(:follows) }
   it { should respond_to(:reverse_follows) }
   it { should respond_to(:followed_users) }

@@ -47,6 +47,7 @@ describe "UserPages" do
 
     it { should have_selector('h1', text: user.username) }
     it { should have_selector('title', text: user.username) }
+    it { should have_xpath("//img[@src=\"#{user.avatar_url(:main)}\"]") }
 
     describe "follow/unfollow buttons" do
       let(:other_user) { FactoryGirl.create(:user) }
@@ -81,6 +82,13 @@ describe "UserPages" do
             it { should have_content(user.username + " followed " + other_user.username) }
           end
         end
+      end
+
+      describe "no avatar" do
+        let(:no_avatar) { FactoryGirl.create(:user, avatar: nil) }
+        before { visit user_path(no_avatar.id) }
+
+        it { should_not have_xpath("//img[@src=\"#{no_avatar.avatar_url(:main)}\"]") }
       end
 
       describe "unfollowing a user" do
@@ -163,6 +171,7 @@ describe "UserPages" do
     it "lists each user" do
       User.all.each do |user|
         page.should have_selector('li', text: user.username)
+        page.should have_xpath("//img[@src=\"#{user.avatar_url(:thumb)}\"]")
       end
     end
   end

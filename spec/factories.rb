@@ -5,6 +5,7 @@ FactoryGirl.define do
     password "factory1"
     password_confirmation "factory1"
     confirmed_at Time.now
+    avatar { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'test.jpg')) }
   end
 
   factory :comic do

@@ -19,13 +19,15 @@ class User < ActiveRecord::Base
   has_many :activities, dependent: :destroy
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :avatar
   # attr_accessible :title, :body
 
   validates_uniqueness_of :username
   validates_uniqueness_of :email
 
   validates(:username, presence: true, length: { maximum: 50 }, uniqueness: true)
+
+  mount_uploader :avatar, UserUploader
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|

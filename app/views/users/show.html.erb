@@ -2,6 +2,10 @@
 <h1><%= @user.username %></h1>
 
 <div>
+  <%= image_tag @user.avatar_url(:main) %>
+</div>
+
+<div>
   <%= render 'follow_form' if user_signed_in? %>
 </div>
 
