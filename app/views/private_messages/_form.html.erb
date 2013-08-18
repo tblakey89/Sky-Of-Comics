@@ -1,0 +1,26 @@
+<div>
+  <%= form_for [@user, @message] do |f| %>
+
+    <%= f.label :title %>
+    <% if @message.reply_id %>
+      <%= f.text_field :title, value: "RE: " + @private_message.title %>
+    <% else %>
+      <%= f.text_field :title %>
+    <% end %>
+
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+
+    <% if @message.recipient_id %>
+      <%= f.hidden_field :recipient_id, value: @message.recipient_id %>
+    <% else %>
+      <%= f.hidden_field :recipient_id, value: @user.id  %>
+    <% end %>
+
+    <% if @message.reply_id %>
+      <%= f.hidden_field :reply_id, value: @message.reply_id %>
+    <% end %>
+
+    <%= f.submit "Send" %>
+  <% end %>
+</div>

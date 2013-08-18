@@ -5,3 +5,12 @@
 <p>From: <%= @private_message.sender.username %></p>
 
 <p><%= @private_message.content %></p>
+
+<% @replies.each do |reply| %>
+  <h3><%= reply.title %></h3>
+  <p><%= reply.content %></p>
+<% end %>
+
+<p>Reply:</p>
+
+<%= render 'form' %>

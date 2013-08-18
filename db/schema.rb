@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818121024) do
+ActiveRecord::Schema.define(:version => 20130818191739) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20130818121024) do
     t.text     "content"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.integer  "reply_id"
+    t.datetime "last_reply"
   end
 
   add_index "private_messages", ["recipient_id"], :name => "index_private_messages_on_recipient_id"

@@ -3,7 +3,7 @@ class PrivateMessagesController < ApplicationController
   before_filter :load_user
 
   def index
-    @private_messages = @user.messages
+    @private_messages = @user.messages.where("reply_id is null").order("coalesce(last_reply, created_at) desc")
   end
 
   def sent
@@ -12,6 +12,8 @@ class PrivateMessagesController < ApplicationController
 
   def show
     @private_message = PrivateMessage.find(params[ :id])
+    @replies = @private_message.replies.find(:all, order: 'created_at asc')
+    @message = @private_message.new_reply
   end
 
   def new

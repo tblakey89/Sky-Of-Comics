@@ -5,6 +5,7 @@ describe PrivateMessagesController do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
   let(:private_message) { FactoryGirl.create(:private_message, sender: user, recipient: user2) }
+  let(:reply) { FactoryGirl.create(:reply_message) }
 
   describe "without signing in" do
     describe "#create" do
@@ -83,6 +84,12 @@ describe PrivateMessagesController do
       it "renders the show view" do
         get :show, user_id: user2.id, id: private_message.id
         response.should render_template :show
+      end
+
+      it "assigns replies" do
+        replies = reply.reply.replies
+        get :show, user_id: reply.recipient.id, id: reply.reply.id
+        assigns(:replies).should eq([reply])
       end
     end
 

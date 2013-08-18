@@ -4,18 +4,4 @@
 
 <p>Send message to <%= @user.username %></p>
 
-<div>
-  <%= form_for [@user, @message] do |f| %>
-
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-
-    <!-- fix this below -->
-    <%= f.hidden_field :recipient_id, value: @user.id  %>
-
-    <%= f.submit "Send" %>
-  <% end %>
-</div>
+<%= render 'form' %>

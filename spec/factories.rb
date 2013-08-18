@@ -72,6 +72,14 @@ FactoryGirl.define do
     association :recipient, factory: :user
   end
 
+  factory :reply_message, class: "PrivateMessage" do
+    title "This is a reply"
+    content "This is what I am sending you"
+    association :sender, factory: :user
+    association :recipient, factory: :user
+    association :reply, factory: :private_message
+  end
+
   factory :comment do
     content "Test123"
     user
