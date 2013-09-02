@@ -71,4 +71,8 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     follows.find_by_followed_id(other_user.id).destroy
   end
+
+  def is_super_admin?
+    true
+  end
 end

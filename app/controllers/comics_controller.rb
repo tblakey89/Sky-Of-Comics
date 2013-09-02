@@ -34,4 +34,12 @@ class ComicsController < ApplicationController
   def destroy
 
   end
+
+  def current_resource
+    if params[:comic_id]
+      @current_resource ||= Comic.find(params[:comic_id])
+    else
+      @current_resource ||= Comic.find(params[:id]) if params[:id]
+    end
+  end
 end

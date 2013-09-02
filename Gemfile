@@ -7,6 +7,7 @@ gem 'omniauth-facebook'
 gem 'devise'
 gem 'carrierwave'
 gem  'rmagick'
+gem 'strong_parameters'
 
 group :development, :test  do
   gem 'rspec-rails', '2.9.0'

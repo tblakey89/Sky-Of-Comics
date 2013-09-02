@@ -27,4 +27,8 @@ private
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
   end
+
+  def current_resource
+    @current_resource ||= Comment.find(params[:id]) if params[:id]
+  end
 end

@@ -43,5 +43,9 @@ private
   def load_user
     @user = User.find(params[:user_id])
   end
+
+  def current_resource
+    @current_resource ||= PrivateMessage.find(params[:id]) if params[:id]
+  end
 end
 
